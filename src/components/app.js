@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader/root';
-import React, { useState } from 'react';
+import { Provider } from 'react-redux';
 
+import configureStore from '../store';
 import Home from './Home';
 
-function App(props) {
-  const [counter, setCounter] = useState(0)
+const store = configureStore();
 
 class App extends Component {
   render() {
     return (
-    <>
+      <Provider store={store}>
         <Home />
-        {counter}
+      </Provider>
     );
   }
 }
