@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 
 import { API_URL, RESTAURANTS } from '../../constants';
 
@@ -22,14 +22,15 @@ class Home extends Component {
   }
 
   fetchRestaurants(query = null) {
+    let city = query;
+
     if (query === null) {
-      query = '?city=toronto';
+      city = 'toronto';
     }
 
-    axios.get(`${API_URL}${RESTAURANTS}${query}`)
-      .then(res => {
-        console.log('response: ', res);
-      });
+    const url = `${API_URL}${RESTAURANTS}?city=${city}`;
+
+    this.props.fetchRestaurants(url);
   }
 
   render() {
@@ -42,7 +43,7 @@ class Home extends Component {
     const handleSubmit = () => {
       event.preventDefault();
       event.stopPropagation();
-      
+
       if (!this.state.searchQuery.length) {
         this.setState({
           searchError: {
@@ -51,8 +52,8 @@ class Home extends Component {
           }
         })
       } else {
-        console.log('Triggering the (commented out) fetch func');
-        // this.fetchRestaurants(searchQuery);
+        // console.log('Triggering the (commented out) fetch func');
+        this.fetchRestaurants(searchQuery);
       }
       return false;
     }
