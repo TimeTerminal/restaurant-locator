@@ -2,7 +2,10 @@ import { createStore } from 'redux';
 import rootReducer from './rootReducer';
 
 export default function configureStore(initialState) {
-  const store = createStore(rootReducer);
+  const store = createStore(
+    rootReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
 
   /* eslint-disable no-undef */
   if (module.hot) {
@@ -12,6 +15,6 @@ export default function configureStore(initialState) {
       store.replaceReducer(nextRootReducer);
     });
   }
-  
+
   return store;
 }

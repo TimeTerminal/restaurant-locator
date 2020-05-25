@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { API_URL, RESTAURANTS } from '../../constants';
+import * as restaurantsActions from '../../store/restaurants/restaurantsAction';
+import { API_URL, RESTAURANTS } from '../../constants/index';
 
 class Home extends Component {
   constructor() {
@@ -85,4 +86,12 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => ({
+  restaurants: state.restaurants
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchRestaurants: restaurantsActions.fetchRestaurantsInjector(dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
