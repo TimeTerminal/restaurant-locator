@@ -4,9 +4,9 @@ import './styles.scss';
 
 const Footer = () => {
   return (
-    <div className="footer_container" >
+    <footer className="footer_container" >
       <p className="footer__text">Powered by OpenTable</p>
-    </div>
+    </footer>
   );
 };
 

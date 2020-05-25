@@ -3,6 +3,8 @@
 .home_container {
   flex-direction: column;
   width: 100%;
+  min-height: 100vh;
+  padding-bottom: 30px;
 }
 
 .top_bar {
@@ -63,7 +65,9 @@
     }
 
     &__logo {
+      width: 100%;
       max-width: 400px;
+      margin: 40px 0;
     }
   }
 }

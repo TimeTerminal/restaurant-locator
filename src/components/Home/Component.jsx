@@ -82,7 +82,7 @@ class Home extends Component {
               className="top_bar__form__searchbar"
             />
             <button
-              name="Submit buttton"
+              name="Submit button"
               type="submit"
               onClick={handleSubmit}
               disabled={!searchQuery.length}

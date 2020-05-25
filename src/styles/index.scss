@@ -1,14 +1,19 @@
 body {
   margin: 0;
+  padding: 0;
+  height: 100%;
 
   * {
     display: flex;
     font-family: "Segoe UI";
     font-family: "Helvetica";
+    box-sizing: border-box;
   }
 }
 
 .app_container {
+  position: relative;
   flex-direction: column;
   width: 100%;
+  min-height: 100%;
 }
