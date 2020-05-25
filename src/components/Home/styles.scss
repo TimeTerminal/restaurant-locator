@@ -7,7 +7,7 @@
   padding-bottom: 30px;
 }
 
-.top_bar {
+.header{
   justify-content: space-between;
   align-items: center;
   padding: 25px;
@@ -47,7 +47,8 @@
   }
 }
 
-.restaurants_list {
+.main_container {
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: $header-color;
@@ -69,6 +70,13 @@
       max-width: 400px;
       margin: 40px 0;
     }
+  }
+
+  .restaurants_list_container {
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 25px;
+    max-width: 1080px;
   }
 }
 

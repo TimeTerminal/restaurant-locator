@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import RestaurantCard from '../RestaurantCard'
 import { API_URL, RESTAURANTS } from '../../constants/index';
 
 import './styles.scss';
@@ -25,12 +26,12 @@ class Home extends Component {
     }
 
     const url = `${API_URL}${RESTAURANTS}?city=${city}`;
-
     this.props.fetchRestaurants(url);
   }
 
   render() {
     const { searchError, searchQuery } = this.state;
+    const { status, entities } = this.props.restaurants;
 
     const setQuery = (event) => {
       this.setState({ searchQuery: event.target.value });
@@ -53,7 +54,7 @@ class Home extends Component {
       return false;
     }
 
-    const noSearchParamsDiv = (
+    const noSearchParamsContainer = (
       <div className="no_restaurants_container">
         <img
           src='src/assets/Opentable logo.png'
@@ -69,24 +70,36 @@ class Home extends Component {
       </div>
     );
 
+    const restaurantsContainer = (
+      <div className="restaurants_list_container">
+        {entities.currPageRestaurants.map(restaurant => {
+          return (
+            <RestaurantCard restaurantData={restaurant} key={restaurant.id} />
+          )
+        })}
+      </div>
+    );
+
     return (
       <div className="home_container" >
-        <div className="top_bar">
-          <h1 className="top_bar__heading">Restaurants Locator</h1>
-          <form name="Search Form" className="top_bar__form">
+
+        {/* Header */}
+        <header className="header">
+          <h1 className="header__heading">Restaurants Locator</h1>
+          <form name="Search Form" className="header__form">
             <input
               name='Restaurant searchbar'
               type='search'
               onChange={setQuery}
               placeholder='Search restaurants...'
-              className="top_bar__form__searchbar"
+              className="header__form__searchbar"
             />
             <button
               name="Submit button"
               type="submit"
               onClick={handleSubmit}
               disabled={!searchQuery.length}
-              className="top_bar__form__button"
+              className="header__form__button"
             >
               <img src='src/assets/search.svg' alt="Search icon" />
             </button>
@@ -95,10 +108,15 @@ class Home extends Component {
                 {searchError.message}
               </label>}
           </form>
-        </div>
+        </header>
 
-        <div className="restaurants_list">
-          {noSearchParamsDiv}
+        {/* Main body */}
+        <div className="main_container">
+          {status === null
+            ? noSearchParamsContainer
+            : restaurantsContainer
+          }
+
         </div>
       </div>
     );
