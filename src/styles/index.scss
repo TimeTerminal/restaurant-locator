@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+
+  * {
+    display: flex;
+    font-family: "Segoe UI";
+    font-family: "Helvetica";
+  }
+}
+
+.app_container {
+  flex-direction: column;
+  width: 100%;
+}
