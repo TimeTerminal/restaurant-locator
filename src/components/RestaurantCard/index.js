@@ -3,17 +3,44 @@ import React from 'react';
 import './styles.scss';
 
 const RestaurantCard = (props) => {
-  // console.log('restaurantData :>> ', props.restaurantData);
   const { address, image_url, name, phone, price } = props.restaurantData;
+
+  const formatPhone = number => {
+    const splitNumber = number.split('');
+
+    const formattedPhone = splitNumber.map((digit, index) => {
+      switch (index) {
+        case 0:
+          return `(${digit}`;
+        case 2:
+          return `${digit}) `;
+        case 5:
+          return `${digit}-`;
+        default:
+          return digit;
+      }
+    })
+
+    return formattedPhone;
+  }
+
+  const formatPrice = price => {
+    const arr = Array.apply(null, Array(price));
+    const dollarSigns = arr.map(hi => {
+      return '$'
+    });
+
+    return dollarSigns;
+  }
 
   return (
     <div className="card_container">
       <p className="card__name">{name}</p>
       <img src={image_url} alt="Restaurant Image" className="card__image" />
       <p className="card__address">{address}</p>
-      <p className="card__phone">{phone}</p>
+      <p className="card__phone">{formatPhone(phone)}</p>
       <p className='card__price'>
-        {Array(price).map(() => $)}
+        {formatPrice(price)}
       </p>
     </div>
   );
