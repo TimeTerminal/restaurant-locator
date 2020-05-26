@@ -1,9 +1,9 @@
-import { ERRORS } from '../../constants';
 import {
   FETCH_RESTAURANTS_REQUEST,
   FETCH_RESTAURANTS_SUCCESS,
   FETCH_RESTAURANTS_FAILURE
 } from '../../constants/actionTypes';
+import { ERRORS } from '../../constants';
 
 const initialState = {
   entities: {
@@ -24,6 +24,7 @@ export default function restaurants(state = initialState, action) {
       }
     case FETCH_RESTAURANTS_SUCCESS:
       const { total_entries, per_page, restaurants } = action.data;
+      const error = restaurants.length ? null : ERRORS.NO_CONTENT;
 
       return {
         ...state,
@@ -33,7 +34,7 @@ export default function restaurants(state = initialState, action) {
           currPageRestaurants: restaurants,
         },
         status: action.type,
-        error: null
+        error
       }
     case FETCH_RESTAURANTS_FAILURE:
       return {

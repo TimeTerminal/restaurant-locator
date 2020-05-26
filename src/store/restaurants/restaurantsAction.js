@@ -17,10 +17,10 @@ const fetchRestaurants = async (dispatch, restaurantsService, url) => {
       data: response.data
     })
   } catch (error) {
-    if (error && error.response.status === 404) {
+    if (error.response && error.response.status === 404) {
       dispatch({
         type: FETCH_RESTAURANTS_FAILURE,
-        error: ERRORS.INVALID
+        error: ERRORS.BAD_REQUEST
       })
     }
   }

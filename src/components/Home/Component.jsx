@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import RestaurantCard from '../RestaurantCard'
-import { API_URL, RESTAURANTS } from '../../constants/index';
+import {
+  API_URL,
+  ERRORS,
+  RESTAURANTS
+} from '../../constants/index';
 import {
   FETCH_RESTAURANTS_REQUEST,
-  FETCH_RESTAURANTS_SUCCESS,
-  FETCH_RESTAURANTS_FAILURE
+  FETCH_RESTAURANTS_SUCCESS
 } from '../../constants/actionTypes';
 
 import './styles.scss';
@@ -36,7 +39,7 @@ class Home extends Component {
 
   render() {
     const { searchError, searchQuery } = this.state;
-    const { status, entities } = this.props.restaurants;
+    const { entities, error, status } = this.props.restaurants;
 
     const setQuery = (event) => {
       this.setState({ searchQuery: event.target.value });
@@ -77,11 +80,15 @@ class Home extends Component {
 
     const restaurantsContainer = (
       <div className="restaurants_list_container">
-        {entities.currPageRestaurants.map(restaurant => {
-          return (
-            <RestaurantCard restaurantData={restaurant} key={restaurant.id} />
-          )
-        })}
+        {error === ERRORS.NO_CONTENT
+          ? <div className="restaurants_list__no_content">
+            No restaurants match your query
+            </div>
+          : entities.currPageRestaurants.map(restaurant => {
+            return (
+              <RestaurantCard restaurantData={restaurant} key={restaurant.id} />
+            )
+          })}
       </div>
     );
 

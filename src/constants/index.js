@@ -3,8 +3,9 @@ const RESTAURANTS = 'restaurants';
 
 // Errors
 const ERRORS = {
-  INVALID: 'RESPONSE_INVALID',
-  NOT_FOUND: 'NOT_FOUND'
+  BAD_REQUEST: 'Bad Request',
+  NOT_FOUND: 'Not Found',
+  NO_CONTENT: 'No Content'
 }
 
 module.exports = {
