@@ -1,3 +1,5 @@
+@import "src/styles/variables.scss";
+
 .card {
   &_container {
     flex-direction: column;
@@ -14,10 +16,15 @@
   }
 
   &__name {
+    color: $theme1;
     font-size: 1.4em;
   }
 
   &__address {
     font-size: 1.2em;
+  }
+
+  &__price {
+    color: $theme4;
   }
 }
