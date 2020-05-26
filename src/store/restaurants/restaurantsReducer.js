@@ -13,6 +13,8 @@ import {
   RESTAURANTS_PER_PAGE
 } from '../../constants';
 
+import { stringComparator } from '../helpers';
+
 const initialState = {
   currentPage: 1,
   entities: {
@@ -47,6 +49,7 @@ export default function restaurants(state = initialState, action) {
       });
 
       const currentPageRestaurants = formattedRestaurantsList.slice(0, RESTAURANTS_PER_PAGE);
+      const filteredRestaurants = [...formattedRestaurantsList];
 
       return {
         ...state,
@@ -54,6 +57,7 @@ export default function restaurants(state = initialState, action) {
           ...state.entities,
           allRestaurants: formattedRestaurantsList,
           currentPageRestaurants,
+          filteredRestaurants,
           total: restaurants.length,
         },
         status: DATA_LOADED,
@@ -69,10 +73,37 @@ export default function restaurants(state = initialState, action) {
     }
 
     case FILTER_RESTAURANTS_REQUEST: {
-      console.log("FILTER_RESTAURANTS_REQUEST state: ", state);
+      const filteredRestaurants = state.entities.allRestaurants.filter(restaurant => {
+        const { name, address, area } = restaurant;
+
+        const nameComparison = stringComparator(name, action.filter);
+        let addressComparison, areaComparison;
+
+        if (nameComparison === false) {
+          addressComparison = stringComparator(address, action.filter);
+        }
+
+        if (addressComparison === false) {
+          areaComparison = stringComparator(area, action.filter);
+        }
+
+        if (nameComparison || addressComparison || areaComparison) {
+          return true;
+        }
+      });
+
+      const currentPageRestaurants = filteredRestaurants.slice(0, RESTAURANTS_PER_PAGE);
+
       return {
         ...state,
-        status: DATA_LOADING
+        currentPage: 1,
+        entities: {
+          ...state.entities,
+          currentPageRestaurants,
+          filteredRestaurants,
+          total: filteredRestaurants.length,
+        },
+        status: DATA_LOADING,
       }
     }
 
