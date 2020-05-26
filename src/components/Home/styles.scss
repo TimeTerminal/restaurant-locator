@@ -8,40 +8,58 @@
 }
 
 .header {
-  justify-content: space-between;
   align-items: center;
   padding: 25px;
-  background-color: $theme1;
+  background-color: $theme3;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 1px 2px;
 
   &__heading {
-    margin: 0 20px 0 0;
-    color: $theme3;
-    font-size: 2.5em;
+    margin: 0;
+    color: $theme1;
+    font-size: 1.5em;
   }
 
   &__form {
-    &__searchbar,
-    &__button {
-      min-height: 40px;
-      padding: 0 10px;
-      border: none;
-    }
+    flex: 1 1 auto;
+    justify-content: center;
 
-    &__searchbar {
-      border-radius: 2px 0 0 2px;
-      background: white;
-      font-size: 1em;
-      font-weight: 500;
-      color: rgba(0, 0, 0, 0.6);
-    }
+    .searchbar {
+      &_container {
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.18) 0px 1px 2px;
 
-    &__button {
-      border-radius: 0 2px 2px 0;
-      cursor: pointer;
+        &:hover {
+          box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 8px;
+        }
+      }
 
-      img {
-        filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg)
-          brightness(104%) contrast(97%);
+      &__input,
+      &__button {
+        min-height: 40px;
+        padding: 0 10px;
+        border: 1px solid $theme4;
+      }
+
+      &__input {
+        width: 15vw;
+        min-width: 150px;
+        border-radius: 10px 0 0 10px;
+        border-right: none;
+        background: white;
+        font-size: 0.9em;
+        font-weight: 500;
+        color: $searchbar-color;
+      }
+
+      &__button {
+        background-color: $theme3;
+        border-radius: 0 10px 10px 0;
+        cursor: pointer;
+
+        img {
+          filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg)
+            brightness(104%) contrast(97%);
+        }
       }
     }
   }
@@ -82,7 +100,7 @@
     }
 
     &__icon {
-      width:7vw;
+      width: 7vw;
       max-width: 100px;
       animation: rotation 2s infinite linear;
 
@@ -120,7 +138,11 @@
 @media (max-width: 1000px) {
   .header {
     &__heading {
-      font-size: 4vw;
+      font-size: 2.4vw;
+    }
+
+    .searchbar__input {
+      font-size: 0.8em;
     }
   }
 }
@@ -131,7 +153,7 @@
 
     &__heading {
       margin: 0 0 20px 0;
-      font-size: 6vw;
+      font-size: 4vw;
     }
   }
 

@@ -120,26 +120,28 @@ class Home extends Component {
         <header className="header">
           <h1 className="header__heading">Restaurants Locator</h1>
           <form name="Search Form" className="header__form">
-            <input
-              name='Restaurant searchbar'
-              type='search'
-              onChange={setQuery}
-              placeholder='Search restaurants...'
-              className="header__form__searchbar"
-            />
-            <button
-              name="Submit button"
-              type="submit"
-              onClick={handleSubmit}
-              disabled={!searchQuery.length}
-              className="header__form__button"
-            >
-              <img src='src/assets/search.svg' alt="Search icon" />
-            </button>
-            {searchError.show &&
-              <label htmlFor="Restaurant searchbar">
-                {searchError.message}
-              </label>}
+            <span className="searchbar_container">
+              <input
+                name='Restaurant searchbar'
+                type='search'
+                onChange={setQuery}
+                placeholder='Search restaurants...'
+                className="searchbar__input"
+              />
+              <button
+                name="Submit button"
+                type="submit"
+                onClick={handleSubmit}
+                disabled={!searchQuery.length}
+                className="searchbar__button"
+              >
+                <img src='src/assets/search.svg' alt="Search icon" />
+              </button>
+              {searchError.show &&
+                <label htmlFor="Restaurant searchbar">
+                  {searchError.message}
+                </label>}
+            </span>
           </form>
         </header>
 
