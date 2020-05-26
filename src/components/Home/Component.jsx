@@ -16,6 +16,8 @@ class Home extends Component {
     }
 
     this.fetchRestaurants = this.fetchRestaurants.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.setQuery = this.setQuery.bind(this);
   }
 
   fetchRestaurants(query = null) {
@@ -29,29 +31,29 @@ class Home extends Component {
     this.props.fetchRestaurants(url);
   }
 
+  handleSubmit() {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (!this.state.searchQuery.length) {
+      this.setState({
+        searchError: {
+          show: true,
+          message: "Required"
+        }
+      })
+    } else {
+      this.fetchRestaurants(this.state.searchQuery);
+    }
+    return false;
+  }
+
+  setQuery(event) {
+    this.setState({ searchQuery: event.target.value });
+  }
+
   render() {
     const { searchError, searchQuery } = this.state;
-
-    const setQuery = (event) => {
-      this.setState({ searchQuery: event.target.value });
-    }
-
-    const handleSubmit = () => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      if (!this.state.searchQuery.length) {
-        this.setState({
-          searchError: {
-            show: true,
-            message: "Required"
-          }
-        })
-      } else {
-        this.fetchRestaurants(searchQuery);
-      }
-      return false;
-    }
 
     return (
       <div className="home_container">
@@ -64,14 +66,14 @@ class Home extends Component {
               <input
                 name='Restaurant searchbar'
                 type='search'
-                onChange={setQuery}
+                onChange={this.setQuery}
                 placeholder='Search restaurants...'
                 className="searchbar__input"
               />
               <button
                 name="Submit button"
                 type="submit"
-                onClick={handleSubmit}
+                onClick={this.handleSubmit}
                 disabled={!searchQuery.length}
                 className="searchbar__button"
               >
