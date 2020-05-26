@@ -36,16 +36,23 @@ export default function restaurants(state = initialState, action) {
       }
     }
     case FETCH_RESTAURANTS_SUCCESS: {
-      const { per_page, restaurants } = action.data;
+      const { restaurants } = action.data;
       const error = restaurants.length ? null : ERRORS.NO_CONTENT;
 
-      const currentPageRestaurants = restaurants.slice(0, RESTAURANTS_PER_PAGE);
+      const formattedRestaurantsList = restaurants.map(restaurant => {
+        // Filter restaurant object to only store entries with relevant information through an anonymous function
+        const filteredRestaurantEntity = (({ address, area, id, image_url, name, phone, price }) => ({ address, area, id, image_url, name, phone, price }))(restaurant);
+
+        return filteredRestaurantEntity;
+      });
+
+      const currentPageRestaurants = formattedRestaurantsList.slice(0, RESTAURANTS_PER_PAGE);
 
       return {
         ...state,
         entities: {
           ...state.entities,
-          allRestaurants: restaurants,
+          allRestaurants: formattedRestaurantsList,
           currentPageRestaurants,
           total: restaurants.length,
         },
