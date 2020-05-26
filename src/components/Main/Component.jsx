@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 
 import RestaurantCard from '../RestaurantCard';
 import Pagination from '../Pagination';
+import Spinner from '../Spinner';
 import {
   DATA_LOADING,
   DATA_LOADED,
@@ -95,20 +96,10 @@ class MainContent extends Component {
       </div>
     );
 
-    const spinnerContainer = (
-      <div className="spinner_container">
-        <img
-          src="src/assets/spinner.svg"
-          alt="Spinner"
-          className="spinner__icon"
-        />
-      </div>
-    );
-
     const renderMainContent = (status) => {
       switch (status) {
         case DATA_LOADING:
-          return spinnerContainer;
+          return <Spinner />;
         case DATA_LOADED:
           return restaurantsContainer;
         default:
