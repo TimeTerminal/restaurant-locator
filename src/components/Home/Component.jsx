@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import MainContent from '../Main';
-import { API_URL, RESTAURANTS } from '../../constants/index';
 
 import './styles.scss';
 
@@ -26,9 +25,8 @@ class Home extends Component {
     if (query === null) {
       city = 'toronto';
     }
-
-    const url = `${API_URL}${RESTAURANTS}?city=${city}`;
-    this.props.fetchRestaurants(url);
+    
+    this.props.fetchRestaurants(city);
   }
 
   handleSubmit() {
@@ -67,7 +65,7 @@ class Home extends Component {
                 name='Restaurant searchbar'
                 type='search'
                 onChange={this.setQuery}
-                placeholder='Search restaurants...'
+                placeholder='Search city...'
                 className="searchbar__input"
               />
               <button

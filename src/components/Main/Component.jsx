@@ -55,9 +55,12 @@ class MainContent extends Component {
               />
             </span>
             <div className="restaurants__list">
-              {entities.currPageRestaurants.map(restaurant => {
+              {entities.allRestaurants.map(restaurant => {
                 return (
-                  <RestaurantCard restaurantData={restaurant} key={restaurant.id} />
+                  <RestaurantCard
+                    restaurantData={restaurant}
+                    key={restaurant.id}
+                  />
                 )
               })}
             </div>

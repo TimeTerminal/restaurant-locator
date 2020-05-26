@@ -9,6 +9,7 @@ const initialState = {
   entities: {
     total: null,
     perPage: null,
+    allRestaurants: [],
     currPageRestaurants: []
   },
   status: null,
@@ -31,7 +32,7 @@ export default function restaurants(state = initialState, action) {
         entities: {
           total: total_entries,
           perPage: per_page,
-          currPageRestaurants: restaurants,
+          allRestaurants: restaurants
         },
         status: action.type,
         error

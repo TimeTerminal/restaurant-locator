@@ -8,11 +8,11 @@ import {
   UPDATE_PAGE
 } from '../../constants/actionTypes';
 
-const fetchRestaurants = async (dispatch, restaurantsService, url) => {
+const fetchRestaurants = async (dispatch, restaurantsService, city) => {
   dispatch({ type: FETCH_RESTAURANTS_REQUEST });
 
   try {
-    const response = await restaurantsService.getRestaurantsFromApi(url);
+    const response = await restaurantsService.getRestaurantsFromApi(city);
 
     dispatch({
       type: FETCH_RESTAURANTS_SUCCESS,
