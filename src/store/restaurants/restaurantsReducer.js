@@ -2,16 +2,24 @@ import {
   FETCH_RESTAURANTS_REQUEST,
   FETCH_RESTAURANTS_SUCCESS,
   FETCH_RESTAURANTS_FAILURE,
+  FILTER_RESTAURANTS_REQUEST,
+  FILTER_RESTAURANTS_COMPLETE,
   UPDATE_PAGE
 } from '../../constants/actionTypes';
-import { ERRORS, RESTAURANTS_PER_PAGE } from '../../constants';
+import {
+  ERRORS,
+  DATA_LOADING,
+  DATA_LOADED,
+  RESTAURANTS_PER_PAGE
+} from '../../constants';
 
 const initialState = {
   currentPage: 1,
   entities: {
-    total: null,
     allRestaurants: [],
+    currentPageRestaurants: [],
     filteredRestaurants: [],
+    total: null,
   },
   error: null,
   perPage: RESTAURANTS_PER_PAGE,
@@ -24,31 +32,47 @@ export default function restaurants(state = initialState, action) {
     case FETCH_RESTAURANTS_REQUEST: {
       return {
         ...state,
-        status: action.type
+        status: DATA_LOADING
       }
     }
     case FETCH_RESTAURANTS_SUCCESS: {
       const { per_page, restaurants } = action.data;
       const error = restaurants.length ? null : ERRORS.NO_CONTENT;
 
-      const filteredRestaurants = restaurants.slice(0, RESTAURANTS_PER_PAGE);
+      const currentPageRestaurants = restaurants.slice(0, RESTAURANTS_PER_PAGE);
 
       return {
         ...state,
         entities: {
-          total: restaurants.length,
+          ...state.entities,
           allRestaurants: restaurants,
-          filteredRestaurants,
+          currentPageRestaurants,
+          total: restaurants.length,
         },
-        status: action.type,
+        status: DATA_LOADED,
         error
       }
     }
     case FETCH_RESTAURANTS_FAILURE: {
       return {
         ...state,
-        status: action.type,
+        status: DATA_LOADED,
         error: action.error
+      }
+    }
+
+    case FILTER_RESTAURANTS_REQUEST: {
+      console.log("FILTER_RESTAURANTS_REQUEST state: ", state);
+      return {
+        ...state,
+        status: DATA_LOADING
+      }
+    }
+
+    case FILTER_RESTAURANTS_COMPLETE: {
+      return {
+        ...state,
+        status: DATA_LOADED
       }
     }
 
@@ -56,14 +80,14 @@ export default function restaurants(state = initialState, action) {
       const start = (action.page - 1) * RESTAURANTS_PER_PAGE;
       const end = start + RESTAURANTS_PER_PAGE;
 
-      const filteredRestaurants = state.entities.allRestaurants.slice(start, end);
+      const currentPageRestaurants = state.entities.allRestaurants.slice(start, end);
 
       return {
         ...state,
         currentPage: action.page,
         entities: {
           ...state.entities,
-          filteredRestaurants
+          currentPageRestaurants
         }
       }
     }

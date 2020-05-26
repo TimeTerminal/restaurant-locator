@@ -2,11 +2,11 @@ import React, { Component, Fragment } from 'react';
 
 import RestaurantCard from '../RestaurantCard';
 import Pagination from '../Pagination';
-import { ERRORS } from '../../constants/index';
 import {
-  FETCH_RESTAURANTS_REQUEST,
-  FETCH_RESTAURANTS_SUCCESS
-} from '../../constants/actionTypes';
+  DATA_LOADING,
+  DATA_LOADED,
+  ERRORS
+} from '../../constants/index';
 import './styles.scss';
 
 class MainContent extends Component {
@@ -17,12 +17,12 @@ class MainContent extends Component {
   }
 
   handleFilterChange() {
-    // this.props.updatePage(event.target.value);
+    this.props.filterRestaurants(event.target.value);
   }
 
   render() {
     const {
-      entities: { filteredRestaurants, total },
+      entities: { currentPageRestaurants, total },
       currentPage,
       error,
       perPage,
@@ -73,7 +73,7 @@ class MainContent extends Component {
             />
 
             <div className="restaurants__list">
-              {filteredRestaurants.map(restaurant => {
+              {currentPageRestaurants.map(restaurant => {
                 return (
                   <RestaurantCard
                     restaurantData={restaurant}
@@ -107,9 +107,9 @@ class MainContent extends Component {
 
     const renderMainContent = (status) => {
       switch (status) {
-        case FETCH_RESTAURANTS_REQUEST:
+        case DATA_LOADING:
           return spinnerContainer;
-        case FETCH_RESTAURANTS_SUCCESS:
+        case DATA_LOADED:
           return restaurantsContainer;
         default:
           return noSearchParamsContainer;
