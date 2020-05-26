@@ -1,0 +1,37 @@
+@import "src/styles/variables.scss";
+
+.pagination {
+  &_container {
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    max-height: 100px;
+  }
+
+  &__card {
+    padding: 0 5px;
+  }
+
+  &__button {
+    align-items: center;
+    height: 25px;
+    border: 1px solid $theme5;
+    border-radius: 1px;
+
+    background-color: $theme3;
+    color: $theme1;
+    cursor: pointer;
+
+    &:disabled {
+      background-color: #d7d7d7;
+      color: black;
+      cursor: initial;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+}
+
+@media (max-width: 500px) {
+}
