@@ -3,11 +3,13 @@ import React, { Component, Fragment } from 'react';
 import RestaurantCard from '../RestaurantCard';
 import Pagination from '../Pagination';
 import Spinner from '../Spinner';
+import { ERRORS } from '../../constants/index';
 import {
-  DATA_LOADING,
-  DATA_LOADED,
-  ERRORS
-} from '../../constants/index';
+  FETCH_RESTAURANTS_REQUEST,
+  FETCH_RESTAURANTS_SUCCESS,
+  FILTER_RESTAURANTS_REQUEST,
+  FILTER_RESTAURANTS_COMPLETE
+} from '../../constants/actionTypes';
 import './styles.scss';
 
 class MainContent extends Component {
@@ -66,30 +68,36 @@ class MainContent extends Component {
               />
             </span>
 
-            {/* Pagination top */}
-            <Pagination
-              total={total}
-              perPage={perPage}
-              currentPage={currentPage}
-            />
+            {status === FILTER_RESTAURANTS_REQUEST
+              ? <Spinner />
+              :
+              <Fragment>
+                {/* Pagination top */}
+                <Pagination
+                  total={total}
+                  perPage={perPage}
+                  currentPage={currentPage}
+                />
 
-            <div className="restaurants__list">
-              {currentPageRestaurants.map(restaurant => {
-                return (
-                  <RestaurantCard
-                    restaurantData={restaurant}
-                    key={restaurant.id}
-                  />
-                )
-              })}
-            </div>
+                <div className="restaurants__list">
+                  {currentPageRestaurants.map(restaurant => {
+                    return (
+                      <RestaurantCard
+                        restaurantData={restaurant}
+                        key={restaurant.id}
+                      />
+                    )
+                  })}
+                </div>
 
-            {/* Pagination bottom */}
-            <Pagination
-              total={total}
-              perPage={perPage}
-              currentPage={currentPage}
-            />
+                {/* Pagination bottom */}
+                <Pagination
+                  total={total}
+                  perPage={perPage}
+                  currentPage={currentPage}
+                />
+              </Fragment>
+            }
 
           </Fragment>
         }
@@ -98,9 +106,11 @@ class MainContent extends Component {
 
     const renderMainContent = (status) => {
       switch (status) {
-        case DATA_LOADING:
+        case FETCH_RESTAURANTS_REQUEST:
           return <Spinner />;
-        case DATA_LOADED:
+        case FETCH_RESTAURANTS_SUCCESS:
+        case FILTER_RESTAURANTS_REQUEST:
+        case FILTER_RESTAURANTS_COMPLETE:
           return restaurantsContainer;
         default:
           return noSearchParamsContainer;

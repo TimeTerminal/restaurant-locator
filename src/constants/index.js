@@ -1,6 +1,4 @@
 const API_URL = 'https://opentable.herokuapp.com/api/';
-const DATA_LOADING = 'loading initiated';
-const DATA_LOADED = 'loading complete';
 const RESTAURANTS = 'restaurants';
 const RESTAURANTS_PER_PAGE = 25;
 
@@ -13,8 +11,6 @@ const ERRORS = {
 
 module.exports = {
   API_URL,
-  DATA_LOADING,
-  DATA_LOADED,
   RESTAURANTS,
   RESTAURANTS_PER_PAGE,
   ERRORS

@@ -8,8 +8,6 @@ import {
 } from '../../constants/actionTypes';
 import {
   ERRORS,
-  DATA_LOADING,
-  DATA_LOADED,
   RESTAURANTS_PER_PAGE
 } from '../../constants';
 
@@ -34,7 +32,7 @@ export default function restaurants(state = initialState, action) {
     case FETCH_RESTAURANTS_REQUEST: {
       return {
         ...state,
-        status: DATA_LOADING
+        status: action.type
       }
     }
     case FETCH_RESTAURANTS_SUCCESS: {
@@ -60,14 +58,14 @@ export default function restaurants(state = initialState, action) {
           filteredRestaurants,
           total: restaurants.length,
         },
-        status: DATA_LOADED,
+        status: action.type,
         error
       }
     }
     case FETCH_RESTAURANTS_FAILURE: {
       return {
         ...state,
-        status: DATA_LOADED,
+        status: action.type,
         error: action.error
       }
     }
@@ -103,14 +101,14 @@ export default function restaurants(state = initialState, action) {
           filteredRestaurants,
           total: filteredRestaurants.length,
         },
-        status: DATA_LOADING,
+        status: action.type,
       }
     }
 
     case FILTER_RESTAURANTS_COMPLETE: {
       return {
         ...state,
-        status: DATA_LOADED
+        status: action.type
       }
     }
 
