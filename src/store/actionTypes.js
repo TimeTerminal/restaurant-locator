@@ -1,3 +1,0 @@
-const FETCH_RESTAURANTS = 'FETCH_RESTAURANTS';
-
-module.exports = { FETCH_RESTAURANTS }

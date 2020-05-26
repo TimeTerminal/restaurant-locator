@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import RestaurantCard from '../RestaurantCard'
 import { API_URL, RESTAURANTS } from '../../constants/index';
+import {
+  FETCH_RESTAURANTS_REQUEST,
+  FETCH_RESTAURANTS_SUCCESS,
+  FETCH_RESTAURANTS_FAILURE
+} from '../../constants/actionTypes';
 
 import './styles.scss';
 
@@ -80,6 +85,27 @@ class Home extends Component {
       </div>
     );
 
+    const spinnerContainer = (
+      <div className="spinner_container">
+        <img
+          src="src/assets/spinner.svg"
+          alt="Spinner"
+          className="spinner__icon"
+        />
+      </div>
+    );
+
+    const renderMainContent = (status) => {
+      switch (status) {
+        case FETCH_RESTAURANTS_REQUEST:
+          return spinnerContainer;
+        case FETCH_RESTAURANTS_SUCCESS:
+          return restaurantsContainer;
+        default:
+          return noSearchParamsContainer;
+      }
+    }
+
     return (
       <div className="home_container" >
 
@@ -111,13 +137,10 @@ class Home extends Component {
         </header>
 
         {/* Main body */}
-        <div className="main_container">
-          {status === null
-            ? noSearchParamsContainer
-            : restaurantsContainer
-          }
+        <section className="main_container">
+          {renderMainContent(status)}
+        </section>
 
-        </div>
       </div>
     );
   }

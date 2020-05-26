@@ -26,7 +26,7 @@ const RestaurantCard = (props) => {
 
   const formatPrice = price => {
     const arr = Array.apply(null, Array(price));
-    const dollarSigns = arr.map(hi => {
+    const dollarSigns = arr.map(()=> {
       return '$'
     });
 
