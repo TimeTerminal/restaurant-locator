@@ -15,16 +15,18 @@ const fetchRestaurants = async (dispatch, restaurantsService, url) => {
     dispatch({
       type: FETCH_RESTAURANTS_SUCCESS,
       data: response.data
-    })
+    });
   } catch (error) {
     if (error.response && error.response.status === 404) {
       dispatch({
         type: FETCH_RESTAURANTS_FAILURE,
         error: ERRORS.BAD_REQUEST
-      })
+      });
     }
   }
 };
+
+export const filterRestaurants = (dispatch, filterQuery) => {
 
 export const fetchRestaurantsInjector = dispatch => {
   return url => {

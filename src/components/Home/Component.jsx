@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
-import RestaurantCard from '../RestaurantCard'
-import {
-  API_URL,
-  ERRORS,
-  RESTAURANTS
-} from '../../constants/index';
-import {
-  FETCH_RESTAURANTS_REQUEST,
-  FETCH_RESTAURANTS_SUCCESS
-} from '../../constants/actionTypes';
+import MainContent from '../Main';
+import { API_URL, RESTAURANTS } from '../../constants/index';
 
 import './styles.scss';
 
@@ -39,7 +31,6 @@ class Home extends Component {
 
   render() {
     const { searchError, searchQuery } = this.state;
-    const { entities, error, status } = this.props.restaurants;
 
     const setQuery = (event) => {
       this.setState({ searchQuery: event.target.value });
@@ -62,59 +53,8 @@ class Home extends Component {
       return false;
     }
 
-    const noSearchParamsContainer = (
-      <div className="no_restaurants_container">
-        <img
-          src='src/assets/Opentable logo.png'
-          alt="Opentable logo"
-          className="no_restaurants__logo"
-        />
-        <h2 className="no_restaurants__heading_one">
-          No City Selected
-        </h2>
-        <h3 className="no_restaurants__heading_two">
-          Please input a city in the searchbar
-        </h3>
-      </div>
-    );
-
-    const restaurantsContainer = (
-      <div className="restaurants_list_container">
-        {error === ERRORS.NO_CONTENT
-          ? <div className="restaurants_list__no_content">
-            No restaurants match your query
-            </div>
-          : entities.currPageRestaurants.map(restaurant => {
-            return (
-              <RestaurantCard restaurantData={restaurant} key={restaurant.id} />
-            )
-          })}
-      </div>
-    );
-
-    const spinnerContainer = (
-      <div className="spinner_container">
-        <img
-          src="src/assets/spinner.svg"
-          alt="Spinner"
-          className="spinner__icon"
-        />
-      </div>
-    );
-
-    const renderMainContent = (status) => {
-      switch (status) {
-        case FETCH_RESTAURANTS_REQUEST:
-          return spinnerContainer;
-        case FETCH_RESTAURANTS_SUCCESS:
-          return restaurantsContainer;
-        default:
-          return noSearchParamsContainer;
-      }
-    }
-
     return (
-      <div className="home_container" >
+      <div className="home_container">
 
         {/* Header */}
         <header className="header">
@@ -146,9 +86,7 @@ class Home extends Component {
         </header>
 
         {/* Main body */}
-        <section className="main_container">
-          {renderMainContent(status)}
-        </section>
+        <MainContent restaurants={this.props.restaurants} />;
 
       </div>
     );
