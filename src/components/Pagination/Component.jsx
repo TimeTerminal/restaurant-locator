@@ -22,11 +22,12 @@ class Pagination extends Component {
           {arr.map((page, index) => {
             const pageNumber = index + 1;
             return (
-              <div className="pagination__card">
+              <div className="pagination__card" key={`page ${pageNumber}`}>
                 <button
                   alt={`page ${pageNumber}`}
                   disabled={shouldButtonBeDisabled(pageNumber)}
                   className="pagination__button"
+                  onClick={() => this.props.updatePage(pageNumber)}
                 >
                   {pageNumber}
                 </button>
