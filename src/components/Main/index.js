@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import * as restaurantsActions from '../../store/restaurants/restaurantsAction';
 
 const mapDispatchToProps = dispatch => ({
-  filterRestaurants: restaurantsActions.filterRestaurants(dispatch)
+  filterRestaurants: restaurantsActions.filterRestaurants(dispatch),
+  updatePage: (filterQuery) => {
+    restaurantsActions.updatePage(dispatch, filterQuery)
+  }
 });
 
 export default connect(

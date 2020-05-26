@@ -4,6 +4,8 @@ import {
   FETCH_RESTAURANTS_REQUEST,
   FETCH_RESTAURANTS_SUCCESS,
   FETCH_RESTAURANTS_FAILURE,
+  FILTER_RESTAURANTS,
+  UPDATE_PAGE
 } from '../../constants/actionTypes';
 
 const fetchRestaurants = async (dispatch, restaurantsService, url) => {
@@ -27,6 +29,18 @@ const fetchRestaurants = async (dispatch, restaurantsService, url) => {
 };
 
 export const filterRestaurants = (dispatch, filterQuery) => {
+  dispatch({
+    type: FILTER_RESTAURANTS,
+    filter: filterQuery
+  });
+};
+
+export const updatePage = (dispatch, page) => {
+  dispatch({
+    type: UPDATE_PAGE,
+    page
+  });
+};
 
 export const fetchRestaurantsInjector = dispatch => {
   return url => {

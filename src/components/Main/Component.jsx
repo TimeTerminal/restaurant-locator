@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import RestaurantCard from '../RestaurantCard';
 import { ERRORS } from '../../constants/index';
 import {
@@ -11,9 +11,12 @@ import './styles.scss';
 class MainContent extends Component {
   constructor() {
     super();
-    this.state = {
-      filterQuery: '',
-    }
+
+    this.handleFilterChange = this.handleFilterChange.bind(this);
+  }
+
+  handleFilterChange() {
+    // this.props.updatePage(event.target.value);
   }
 
   render() {
@@ -36,16 +39,30 @@ class MainContent extends Component {
     );
 
     const restaurantsContainer = (
-      <div className="restaurants_list_container">
+      <div className="restaurants_container">
         {error === ERRORS.NO_CONTENT
-          ? <div className="restaurants_list__no_content">
+          ? <div className="restaurants__no_content">
             No restaurants match your query
             </div>
-          : entities.currPageRestaurants.map(restaurant => {
-            return (
-              <RestaurantCard restaurantData={restaurant} key={restaurant.id} />
-            )
-          })}
+          : <Fragment>
+            <span className="restaurants__filter">
+              <input
+                name='Restaurant filter'
+                type='search'
+                onChange={this.handleFilterChange}
+                placeholder='Filter results'
+                className="restaurants__filter__input"
+              />
+            </span>
+            <div className="restaurants__list">
+              {entities.currPageRestaurants.map(restaurant => {
+                return (
+                  <RestaurantCard restaurantData={restaurant} key={restaurant.id} />
+                )
+              })}
+            </div>
+          </Fragment>
+        }
       </div>
     );
 

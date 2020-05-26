@@ -62,11 +62,29 @@
     }
   }
 
-  .restaurants_list_container {
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 25px;
-    max-width: 1080px;
+  .restaurants {
+    &_container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__filter {
+      margin-top: 25px;
+      
+      &__input {
+        min-height: 40px;
+        padding: 0 10px;
+        border: 1px solid $theme5;
+        border-radius: 10px;
+      }
+    }
+
+    &__list {
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 25px;
+      max-width: 1080px;
+    }
   }
 }
 
