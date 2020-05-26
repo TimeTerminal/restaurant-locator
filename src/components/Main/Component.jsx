@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
+
 import RestaurantCard from '../RestaurantCard';
+import Pagination from '../Pagination';
 import { ERRORS } from '../../constants/index';
 import {
   FETCH_RESTAURANTS_REQUEST,
   FETCH_RESTAURANTS_SUCCESS
 } from '../../constants/actionTypes';
-
 import './styles.scss';
 
 class MainContent extends Component {
@@ -20,7 +21,13 @@ class MainContent extends Component {
   }
 
   render() {
-    const { entities, error, status } = this.props.restaurants;
+    const {
+      entities: { filteredRestaurants, total },
+      currentPage,
+      error,
+      perPage,
+      status
+    } = this.props.restaurantsData;
 
     const noSearchParamsContainer = (
       <div className="no_restaurants_container">
@@ -44,7 +51,10 @@ class MainContent extends Component {
           ? <div className="restaurants__no_content">
             No restaurants match your query
             </div>
-          : <Fragment>
+          :
+          <Fragment>
+
+            {/* Filter */}
             <span className="restaurants__filter">
               <input
                 name='Restaurant filter'
@@ -54,8 +64,16 @@ class MainContent extends Component {
                 className="restaurants__filter__input"
               />
             </span>
+
+            {/* Pagination top */}
+            <Pagination
+              total={total}
+              perPage={perPage}
+              currentPage={currentPage}
+            />
+
             <div className="restaurants__list">
-              {entities.allRestaurants.map(restaurant => {
+              {filteredRestaurants.map(restaurant => {
                 return (
                   <RestaurantCard
                     restaurantData={restaurant}
@@ -64,6 +82,14 @@ class MainContent extends Component {
                 )
               })}
             </div>
+
+            {/* Pagination bottom */}
+            <Pagination
+              total={total}
+              perPage={perPage}
+              currentPage={currentPage}
+            />
+
           </Fragment>
         }
       </div>

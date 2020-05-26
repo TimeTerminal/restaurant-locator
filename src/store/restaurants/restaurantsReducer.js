@@ -3,17 +3,18 @@ import {
   FETCH_RESTAURANTS_SUCCESS,
   FETCH_RESTAURANTS_FAILURE
 } from '../../constants/actionTypes';
-import { ERRORS } from '../../constants';
+import { ERRORS, RESTAURANTS_PER_PAGE } from '../../constants';
 
 const initialState = {
+  currentPage: 1,
   entities: {
     total: null,
-    perPage: null,
     allRestaurants: [],
-    currPageRestaurants: []
+    filteredRestaurants: [],
   },
-  status: null,
-  error: null
+  error: null,
+  perPage: RESTAURANTS_PER_PAGE,
+  status: null
 };
 
 export default function restaurants(state = initialState, action) {
@@ -24,15 +25,17 @@ export default function restaurants(state = initialState, action) {
         status: action.type
       }
     case FETCH_RESTAURANTS_SUCCESS:
-      const { total_entries, per_page, restaurants } = action.data;
+      const { per_page, restaurants } = action.data;
       const error = restaurants.length ? null : ERRORS.NO_CONTENT;
+
+      const filteredRestaurants = restaurants.slice(0, RESTAURANTS_PER_PAGE);
 
       return {
         ...state,
         entities: {
-          total: total_entries,
-          perPage: per_page,
-          allRestaurants: restaurants
+          total: restaurants.length,
+          allRestaurants: restaurants,
+          filteredRestaurants,
         },
         status: action.type,
         error

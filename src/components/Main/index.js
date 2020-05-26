@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 import * as restaurantsActions from '../../store/restaurants/restaurantsAction';
 
 const mapDispatchToProps = dispatch => ({
-  filterRestaurants: restaurantsActions.filterRestaurants(dispatch),
-  updatePage: (filterQuery) => {
-    restaurantsActions.updatePage(dispatch, filterQuery)
-  }
+  filterRestaurants: restaurantsActions.filterRestaurants(dispatch)
 });
 
 export default connect(

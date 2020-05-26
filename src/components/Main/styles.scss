@@ -69,7 +69,7 @@
     }
 
     &__filter {
-      margin-top: 25px;
+      margin: 25px 0;
       
       &__input {
         min-height: 40px;
@@ -82,7 +82,7 @@
     &__list {
       flex-wrap: wrap;
       justify-content: center;
-      margin: 25px;
+      margin: 0 25px 25px;
       max-width: 1080px;
     }
   }

@@ -25,7 +25,7 @@ class Home extends Component {
     if (query === null) {
       city = 'toronto';
     }
-    
+
     this.props.fetchRestaurants(city);
   }
 
@@ -86,7 +86,7 @@ class Home extends Component {
         </header>
 
         {/* Main body */}
-        <MainContent restaurants={this.props.restaurants} />;
+        <MainContent restaurantsData={this.props.restaurants} />;
 
       </div>
     );
