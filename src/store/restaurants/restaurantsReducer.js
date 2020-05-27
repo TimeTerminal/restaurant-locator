@@ -23,7 +23,7 @@ const initialState = {
   },
   error: null,
   perPage: RESTAURANTS_PER_PAGE,
-  status: null
+  status: 'initialState'
 };
 
 export default function restaurants(state = initialState, action) {

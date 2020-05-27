@@ -1,9 +1,10 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 
 import RestaurantCard from '../RestaurantCard';
 import Pagination from '../Pagination';
 import Spinner from '../Spinner';
+import useDidMountEffect from '../../hooks/useDidMount';
 import { ERRORS } from '../../constants/index';
 import {
   FETCH_RESTAURANTS_REQUEST,
@@ -31,11 +32,28 @@ const MainContent = props => {
     });
   }
 
-  useEffect(() => {
-    // dispatch({
-    //   type: FILTER_RESTAURANTS_COMPLETE
-    // });
-  })
+  useDidMountEffect(
+    () => {
+      if (status === FILTER_RESTAURANTS_REQUEST)
+        dispatch({
+          type: FILTER_RESTAURANTS_COMPLETE
+        });
+    },
+    status, currentPageRestaurants
+  );
+
+  const renderMainContent = (status) => {
+    switch (status) {
+      case FETCH_RESTAURANTS_REQUEST:
+        return <Spinner />;
+      case FETCH_RESTAURANTS_SUCCESS:
+      case FILTER_RESTAURANTS_REQUEST:
+      case FILTER_RESTAURANTS_COMPLETE:
+        return restaurantsContainer;
+      default:
+        return noSearchParamsContainer;
+    }
+  }
 
   const noSearchParamsContainer = (
     <div className="no_restaurants_container">
@@ -108,19 +126,6 @@ const MainContent = props => {
       }
     </div>
   );
-
-  const renderMainContent = (status) => {
-    switch (status) {
-      case FETCH_RESTAURANTS_REQUEST:
-        return <Spinner />;
-      case FETCH_RESTAURANTS_SUCCESS:
-      case FILTER_RESTAURANTS_REQUEST:
-      case FILTER_RESTAURANTS_COMPLETE:
-        return restaurantsContainer;
-      default:
-        return noSearchParamsContainer;
-    }
-  }
 
   return (
     <section className="main_container">
