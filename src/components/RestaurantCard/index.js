@@ -4,7 +4,14 @@ import PropTypes from 'prop-types';
 import './styles.scss';
 
 const RestaurantCard = (props) => {
-  const { address, image_url, name, phone, price } = props.restaurantData;
+  const {
+    address,
+    area,
+    image_url,
+    name,
+    phone,
+    price
+  } = props.restaurantData;
 
   const formatPhone = number => {
     const splitNumber = number.split('');
@@ -39,6 +46,7 @@ const RestaurantCard = (props) => {
       <p className="card__name">{name}</p>
       <img src={image_url} alt="Restaurant Image" className="card__image" />
       <p className="card__address">{address}</p>
+      <p className="card__area">{area}</p>
       <p className="card__phone">{formatPhone(phone)}</p>
       <p className='card__price'>
         {formatPrice(price)}
@@ -50,6 +58,7 @@ const RestaurantCard = (props) => {
 RestaurantCard.propTypes = {
   restaurantData: PropTypes.shape({
     address: PropTypes.string.isRequired,
+    area: PropTypes.string.isRequired,
     image_url: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,
