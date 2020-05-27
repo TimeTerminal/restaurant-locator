@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --hot",
-    "build": "webpack --config webpack.prod.js --mode production"
+    "build": "webpack --config webpack.prod.js --mode production",
+    "test": "jest --config jest.config.json"
   },
   "keywords": [],
   "author": "",
@@ -25,10 +26,14 @@
     "@babel/plugin-transform-runtime": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
+    "@testing-library/jest-dom": "^5.8.0",
+    "@testing-library/react": "^10.0.4",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "html-webpack-plugin": "^4.3.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.0.1",
     "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
