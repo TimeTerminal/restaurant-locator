@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
-import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantCard from '../RestaurantCard';
 import Pagination from '../Pagination';
@@ -15,16 +14,15 @@ import {
 } from '../../constants/actionTypes';
 import './styles.scss';
 
-const MainContent = props => {
+const MainContent = () => {
   const dispatch = useDispatch();
-
   const {
     entities: { currentPageRestaurants, total },
     currentPage,
     error,
     perPage,
     status
-  } = props.restaurantsData;
+  } = useSelector(state => state.restaurants);
 
   const handleFilterChange = () => {
     dispatch({
@@ -135,18 +133,5 @@ const MainContent = props => {
     </section>
   );
 }
-
-MainContent.propTypes = {
-  restaurantsData: PropTypes.shape({
-    currentPage: PropTypes.number.isRequired,
-    entities: PropTypes.object.isRequired,
-    error: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.oneOf([null])
-    ]),
-    perPage: PropTypes.number.isRequired,
-    status: PropTypes.string
-  }).isRequired
-};
 
 export default MainContent;

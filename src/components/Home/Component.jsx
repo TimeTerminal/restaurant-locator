@@ -88,7 +88,7 @@ class Home extends Component {
         </header>
 
         {/* Main body */}
-        <MainContent restaurantsData={this.props.restaurants} />
+        <MainContent />
 
       </div>
     );
