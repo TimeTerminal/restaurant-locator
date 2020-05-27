@@ -63,6 +63,7 @@ class Home extends Component {
             <span className="searchbar_container">
               <input
                 name='Restaurant searchbar'
+                aria-label='Restaurant searchbar'
                 type='search'
                 onChange={this.setQuery}
                 placeholder='Search city...'
@@ -86,7 +87,7 @@ class Home extends Component {
         </header>
 
         {/* Main body */}
-        <MainContent restaurantsData={this.props.restaurants} />;
+        <MainContent restaurantsData={this.props.restaurants} />
 
       </div>
     );

@@ -84,6 +84,7 @@ const MainContent = props => {
           <span className="restaurants__filter">
             <input
               name='Restaurant filter'
+              aria-label='Restaurant filter'
               type='search'
               onChange={handleFilterChange}
               placeholder='Filter results'
