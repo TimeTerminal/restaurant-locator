@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import RestaurantCard from '../RestaurantCard';
 import Pagination from '../Pagination';
@@ -134,5 +135,18 @@ const MainContent = props => {
     </section>
   );
 }
+
+MainContent.propTypes = {
+  restaurantsData: PropTypes.shape({
+    currentPage: PropTypes.number.isRequired,
+    entities: PropTypes.object.isRequired,
+    error: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.oneOf([null])
+    ]),
+    perPage: PropTypes.number.isRequired,
+    status: PropTypes.string
+  }).isRequired
+};
 
 export default MainContent;

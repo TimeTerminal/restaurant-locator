@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MainContent from '../Main';
+import PropTypes from 'prop-types';
 
 import './styles.scss';
 
@@ -93,5 +94,19 @@ class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  fetchRestaurants: PropTypes.func.isRequired,
+  restaurants: PropTypes.shape({
+    currentPage: PropTypes.number.isRequired,
+    entities: PropTypes.object.isRequired,
+    error: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.oneOf([null])
+    ]),
+    perPage: PropTypes.number.isRequired,
+    status: PropTypes.string
+  }).isRequired
+};
 
 export default Home;

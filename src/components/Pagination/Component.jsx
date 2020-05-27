@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import './styles.scss';
 
@@ -39,5 +40,11 @@ class Pagination extends Component {
     );
   }
 }
+
+Pagination.propTypes = {
+  currentPage: PropTypes.number.isRequired,
+  perPage: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired
+};
 
 export default Pagination;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './styles.scss';
 
@@ -26,7 +27,7 @@ const RestaurantCard = (props) => {
 
   const formatPrice = price => {
     const arr = Array.apply(null, Array(price));
-    const dollarSigns = arr.map(()=> {
+    const dollarSigns = arr.map(() => {
       return '$'
     });
 
@@ -44,6 +45,16 @@ const RestaurantCard = (props) => {
       </p>
     </div>
   );
+};
+
+RestaurantCard.propTypes = {
+  restaurantData: PropTypes.shape({
+    address: PropTypes.string.isRequired,
+    image_url: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired
+  }).isRequired
 };
 
 export default RestaurantCard;
