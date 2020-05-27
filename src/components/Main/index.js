@@ -1,10 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantCard from '../RestaurantCard';
 import Pagination from '../Pagination';
 import Spinner from '../Spinner';
-import useDidMountEffect from '../../hooks/useDidMount';
 import { ERRORS } from '../../constants/index';
 import {
   FETCH_RESTAURANTS_REQUEST,
@@ -31,14 +30,14 @@ const MainContent = () => {
     });
   }
 
-  useDidMountEffect(
+  useEffect(
     () => {
       if (status === FILTER_RESTAURANTS_REQUEST)
         dispatch({
           type: FILTER_RESTAURANTS_COMPLETE
         });
     },
-    status, currentPageRestaurants
+    [status, currentPageRestaurants]
   );
 
   const renderMainContent = (status) => {
