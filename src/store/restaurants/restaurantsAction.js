@@ -29,13 +29,6 @@ const fetchRestaurants = async (dispatch, restaurantsService, city) => {
   }
 };
 
-export const filterRestaurants = (dispatch, filterQuery) => {
-  dispatch({
-    type:   FILTER_RESTAURANTS_REQUEST,
-    filter: filterQuery
-  });
-};
-
 export const updatePage = (dispatch, page) => {
   dispatch({
     type: UPDATE_PAGE,
