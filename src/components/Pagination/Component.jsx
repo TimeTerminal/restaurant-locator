@@ -19,7 +19,10 @@ class Pagination extends Component {
 
     return (
       <section className="pagination_container">
-        <span className="pagination__list">
+        <span
+          data-testid="pagination_list"
+          className="pagination__list"
+        >
           {arr.map((page, index) => {
             const pageNumber = index + 1;
             return (
