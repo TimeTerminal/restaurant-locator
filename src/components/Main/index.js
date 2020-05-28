@@ -23,7 +23,7 @@ const MainContent = () => {
     status
   } = useSelector(state => state.restaurants);
 
-  const handleFilterChange = () => {
+  const handleFilterChange = (event) => {
     dispatch({
       type: FILTER_RESTAURANTS_REQUEST,
       filter: event.target.value
@@ -87,6 +87,7 @@ const MainContent = () => {
             <input
               name='Restaurant filter'
               aria-label='Restaurant filter'
+              data-testid="restaurants_filter_input"
               type='search'
               onChange={handleFilterChange}
               placeholder='Filter results'
@@ -105,7 +106,10 @@ const MainContent = () => {
                 currentPage={currentPage}
               />
 
-              <div className="restaurants__list">
+              <div
+                className="restaurants__list"
+                data-testid="restaurants_cards_list"
+                >
                 {currentPageRestaurants.map(restaurant => {
                   return (
                     <RestaurantCard

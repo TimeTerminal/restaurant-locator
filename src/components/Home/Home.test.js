@@ -9,7 +9,7 @@ import '@testing-library/jest-dom/extend-expect';
 import Home from './Component';
 import { renderWithStore } from '../../tests/renderWithStore';
 import { restaurantsData } from '../../tests/mocks/restaurantData';
-import { restaurantsFixture } from '../../tests/fixtures/restaurants';
+import { restaurantsFixture } from '../../tests/fixtures';
 import {
   FETCH_RESTAURANTS_SUCCESS,
   FILTER_RESTAURANTS_REQUEST,
@@ -85,7 +85,7 @@ describe("Home and Main", () => {
     expect(screen.getByTestId('no_content_container')).toBeInTheDocument();
   });
 
-  it("handles 0 restaurants returned case properly", () => {
+  it("filters restaurants correctly and renders them properly", () => {
     const { store } = renderWithStore(
       <Home
         restaurants={restaurantsData}
@@ -93,17 +93,15 @@ describe("Home and Main", () => {
       />
     );
 
+    store.dispatch(mockFetchRestaurantsSuccessAction);
     fireEvent.change(
-      screen.getByTestId('city-search-input'),
-      { target: { value: 'new york' } }
+      screen.getByTestId('restaurants_filter_input'),
+      { target: { value: '6' } }
     );
 
-    fireEvent.click(screen.getByTestId('city-search-submit-button'));
-    store.dispatch(mockFetchRestaurantsNoDataAction);
-
     const storeData = store.getState().restaurants;
-    expect(storeData.entities.total).toEqual(0);
+    expect(storeData.entities.filteredRestaurants.length).toEqual(3);
 
-    expect(screen.getByTestId('no_content_container')).toBeInTheDocument();
+    expect(screen.getByTestId('restaurants_cards_list').children.length).toBe(3);
   });
 });
