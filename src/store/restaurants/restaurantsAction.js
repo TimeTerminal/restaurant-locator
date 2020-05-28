@@ -37,7 +37,7 @@ export const updatePage = (dispatch, page) => {
 };
 
 export const fetchRestaurantsInjector = dispatch => {
-  return url => {
-    fetchRestaurants(dispatch, restaurantsService, url);
+  return city => {
+    fetchRestaurants(dispatch, restaurantsService, city);
   };
 };

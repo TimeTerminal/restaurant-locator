@@ -30,7 +30,7 @@ class Home extends Component {
     this.props.fetchRestaurants(city);
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -63,8 +63,9 @@ class Home extends Component {
           <form name="Search Form" className="header__form">
             <span className="searchbar_container">
               <input
-                name='Restaurant searchbar'
-                aria-label='Restaurant searchbar'
+                name='City searchbar'
+                aria-label='City searchbar'
+                data-testid="city-search-input"
                 type='search'
                 onChange={this.setQuery}
                 placeholder='Search city...'
@@ -72,6 +73,7 @@ class Home extends Component {
               />
               <button
                 name="Submit button"
+                data-testid="city-search-submit-button"
                 type="submit"
                 onClick={this.handleSubmit}
                 disabled={!searchQuery.length}

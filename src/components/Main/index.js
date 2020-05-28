@@ -72,9 +72,13 @@ const MainContent = () => {
   const restaurantsContainer = (
     <div className="restaurants_container">
       {error === ERRORS.NO_CONTENT
-        ? <div className="restaurants__no_content">
+        ?
+        <div
+          className="restaurants__no_content"
+          data-testid="no_content_container"
+        >
           No restaurants match your query
-          </div>
+        </div>
         :
         <Fragment>
 
