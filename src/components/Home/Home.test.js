@@ -4,7 +4,8 @@ import '@testing-library/jest-dom/extend-expect';
 
 import Home from './Component';
 import { renderWithStore } from '../../tests/renderWithStore';
-import { ERRORS, RESTAURANTS_PER_PAGE } from '../../constants/index';
+import { restaurantsData } from '../../tests/mocks/restaurantData';
+import { ERRORS } from '../../constants/index';
 import {
   FETCH_RESTAURANTS_REQUEST,
   FETCH_RESTAURANTS_SUCCESS,
@@ -12,27 +13,21 @@ import {
   FILTER_RESTAURANTS_COMPLETE
 } from '../../constants/actionTypes';
 
-const restaurants = ({
-  currentPage: 1,
-  entities: {
-    allRestaurants: [],
-    currentPageRestaurants: [],
-    filteredRestaurants: [],
-    total: null,
-  },
-  error: null,
-  perPage: RESTAURANTS_PER_PAGE,
-  status: 'initialState'
+const fetchRestaurants = jest.fn(x => {
+  console.log('x :>> ', x);
 });
-
-const fetchRestaurants = () => { };
 
 describe("Home", () => {
   afterEach(cleanup);
 
-  it("Renders", () => {
+  it("Renders with store hooked up with initial state", () => {
     renderWithStore(
-      <Home restaurants={restaurants} fetchRestaurants={fetchRestaurants} />
+      <Home
+        restaurants={restaurantsData}
+        fetchRestaurants={fetchRestaurants}
+      />
+    );
+  });
     );
   })
 });
