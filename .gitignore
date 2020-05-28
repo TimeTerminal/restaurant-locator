@@ -1,4 +1,5 @@
 dist/
+/.firebaserc
 
 # Logs
 logs

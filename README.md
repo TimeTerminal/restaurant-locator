@@ -1,5 +1,7 @@
 Restaurant Locator
 
+URL: [http://localhost:8080](https://restaurant-locator-818bf.firebaseapp.com/)
+
 # Start
 
 ## 1.0 Development
@@ -10,7 +12,7 @@ Restaurant Locator
 
 ## 2.0 Production
 
-`npm build`
+`npm run build`
 
 ## 3.0 Tests
 
