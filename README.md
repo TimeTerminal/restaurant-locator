@@ -1,6 +1,6 @@
 Restaurant Locator
 
-URL: [http://localhost:8080](https://restaurant-locator-818bf.firebaseapp.com/)
+#### Hosting URL: [https://restaurant-locator-818bf.web.app/](https://restaurant-locator-818bf.web.app/)
 
 # Start
 
@@ -10,12 +10,10 @@ URL: [http://localhost:8080](https://restaurant-locator-818bf.firebaseapp.com/)
 - `npm start`
 - Navigate to [http://localhost:8080](http://localhost:8080) in your browser.
 
-## 2.0 Production
+## 2.0 Build
 
 `npm run build`
 
-## 3.0 Tests
-
-##### 3.0.1 Unit Tests
+## 3.0 Run Tests
 
 - `npm run test` using Jest with testing-library
