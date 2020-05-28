@@ -1,4 +1,4 @@
-const restaurants = Object.freeze({
+const restaurantsFixture = Object.freeze({
   "total_entries": 26,
   "restaurants": [
     {
@@ -290,4 +290,4 @@ const restaurants = Object.freeze({
   ]
 });
 
-module.exports = { restaurants }
+module.exports = { restaurantsFixture }
